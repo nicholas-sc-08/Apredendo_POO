@@ -14,3 +14,17 @@ export async function buscar_usuarios(): Promise<I_usuario[] | null>{
         throw new Error("Erro no service buscar usuários!");
     };
 };
+
+export async function buscar_usuario_id(id: number): Promise<I_usuario | null>{
+
+    try {
+
+        const usuario: I_usuario | null = await prisma.usuario.findUnique({where: {id}});
+        return usuario;
+        
+    } catch (erro: any) {
+      
+        console.error(erro);
+        throw new Error("Erro no service buscar usuário pelo ID");
+    };
+};
