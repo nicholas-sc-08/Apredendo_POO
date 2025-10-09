@@ -76,3 +76,17 @@ export async function put_usuario(req: FastifyRequest<{Params: Get_params_usuari
         reply.status(500).send({message: erro});
     };
 };
+
+export async function delete_usuario(req: FastifyRequest<{Params: Get_params_usuario}>, reply: FastifyReply): Promise<void>{
+
+    try {
+
+        const { id } = req.params;
+        const usuario: void = await Services_usuario.deletar_usuario(id);
+        reply.status(200).send({message: "Usuário excluído com sucesso"});
+        
+    } catch (erro: any) {
+      
+        reply.status(500).send({message: erro});
+    };
+};
