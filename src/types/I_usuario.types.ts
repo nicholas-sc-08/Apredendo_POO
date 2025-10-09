@@ -1,3 +1,5 @@
+import type { Prisma } from "../generated/prisma/index.js";
+
 export interface I_usuario {
 
     id: number;

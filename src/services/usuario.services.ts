@@ -1,4 +1,5 @@
 import prisma from "../config/client.js";
+import type { Prisma } from "../generated/prisma/index.js";
 import type { I_usuario, I_create_usuario, I_update_usuario } from "../types/I_usuario.types.js";
 
 export async function buscar_usuarios(): Promise<I_usuario[] | null>{
@@ -47,7 +48,7 @@ export async function atualizar_usuario(id: number, data: I_update_usuario): Pro
 
     try {
 
-        const usuario: I_usuario = await prisma.usuario.update({where: {id}, data: data});
+        const usuario: I_usuario = await prisma.usuario.update({where: {id}, data: data as Partial<Prisma.UsuarioUpdateInput>});
         return usuario;
 
     } catch (erro: any) {
