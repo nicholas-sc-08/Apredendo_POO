@@ -56,3 +56,16 @@ export async function atualizar_usuario(id: number, data: I_update_usuario): Pro
         throw new Error("Erro no service atualizar usuário");
     };
 };
+
+export async function deletar_usuario(id: number): Promise<void>{
+
+    try {
+
+        const usuario = await prisma.usuario.delete({where: {id}});
+        
+    } catch (erro: any) {
+      
+        console.error(erro);
+        throw new Error("Erro no service deletar usuário");
+    };
+};
