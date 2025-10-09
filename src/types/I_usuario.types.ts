@@ -19,3 +19,8 @@ export interface I_update_usuario {
     email?: string;
     senha?: string;
 };
+
+export interface Get_params_usuario {
+
+    id: number;
+};
