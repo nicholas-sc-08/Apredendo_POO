@@ -23,3 +23,24 @@ export async function get_usuarios(req: FastifyRequest, reply: FastifyReply): Pr
         reply.status(500).send({message: erro});
     };
 };
+
+export async function get_usuario_id(req: FastifyRequest<{}>, reply: FastifyReply): Promise<void>{
+
+    try {
+
+        const { id } = req.params;
+        const usuario: I_usuario | null = await Services_usuario.buscar_usuario_id(id);
+
+        if(usuario){
+
+            reply.status(200).send(usuario);
+        } else {
+
+            reply.status(404).send({message: "Usuário não encontrado pelo ID"});
+        };
+        
+    } catch (erro: any) {
+      
+        reply.status(500).send({message: erro});
+    };
+};
