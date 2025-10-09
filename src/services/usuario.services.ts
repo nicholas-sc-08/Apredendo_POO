@@ -28,3 +28,17 @@ export async function buscar_usuario_id(id: number): Promise<I_usuario | null>{
         throw new Error("Erro no service buscar usuário pelo ID");
     };
 };
+
+export async function cadastrar_usuario(data: I_create_usuario): Promise<I_usuario>{
+
+    try {
+
+        const usuario: I_usuario = await prisma.usuario.create({data: data});
+        return usuario;
+        
+    } catch (erro: any) {
+      
+        console.error(erro);
+        throw new Error("Erro no service cadastrar usuário");
+    };
+};
