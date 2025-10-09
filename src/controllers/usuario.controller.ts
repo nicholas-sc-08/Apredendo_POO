@@ -1,4 +1,4 @@
-import { usuario_schema, type usuario_update_schema } from "../zod/usuario.validation.js";
+import { usuario_schema, usuario_update_schema } from "../zod/usuario.validation.js";
 import type { I_usuario, I_create_usuario, I_update_usuario, Get_params_usuario } from "../types/I_usuario.types.js";
 import type { FastifyRequest, FastifyReply } from "fastify";
 import * as Services_usuario from "../services/usuario.services.js";
@@ -59,5 +59,20 @@ export async function post_usuario(req: FastifyRequest<{Body: I_create_usuario}>
     } catch (erro) {
       
         reply.status(500).send({message: "Erro ao fazer post dos dados do usuários"});
+    };
+};
+
+export async function put_usuario(req: FastifyRequest<{Params: Get_params_usuario, Body: I_update_usuario}>, reply: FastifyReply): Promise<void>{
+    
+    try {
+
+        const { id } = req.params;
+        const data = usuario_update_schema.parse(req.body);
+        const usuario: I_usuario = await Services_usuario.atualizar_usuario(id, data);
+        reply.status(200).send(usuario);
+
+    } catch (erro: any) {
+      
+        reply.status(500).send({message: erro});
     };
 };

@@ -15,9 +15,9 @@ export interface I_create_usuario {
 
 export interface I_update_usuario {
 
-    nome?: string;
-    email?: string;
-    senha?: string;
+    nome?: string | undefined;
+    email?: string | undefined;
+    senha?: string | undefined;
 };
 
 export interface Get_params_usuario {
