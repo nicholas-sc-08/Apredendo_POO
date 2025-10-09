@@ -42,3 +42,17 @@ export async function cadastrar_usuario(data: I_create_usuario): Promise<I_usuar
         throw new Error("Erro no service cadastrar usuário");
     };
 };
+
+export async function atualizar_usuario(id: number, data: I_update_usuario): Promise<I_usuario>{
+
+    try {
+
+        const usuario: I_usuario = await prisma.usuario.update({where: {id}, data: data});
+        return usuario;
+
+    } catch (erro: any) {
+      
+        console.error(erro);
+        throw new Error("Erro no service atualizar usuário");
+    };
+};
